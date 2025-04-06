@@ -1,0 +1,30 @@
+# Bytecode + Python caches
+__pycache__/
+*.pyc
+
+# Jupyter and IPython stuff
+.ipynb_checkpoints/
+
+# VSCode project settings
+.vscode/
+
+# OS-specific
+.DS_Store
+
+# Environment files
+.env
+*.env
+
+# Results (you can track plots/logs selectively if needed)
+results/fitness_logs/
+results/plots/
+
+# Model checkpoints (if you train models later)
+*.h5
+*.pkl
+*.pt
+*.ckpt
+
+# Virtual environments
+venv/
+env/
