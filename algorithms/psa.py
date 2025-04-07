@@ -1,0 +1,45 @@
+import numpy as np
+
+def run_psa(benchmark_func, dim, num_particles, iterations, bounds, w=0.5, c1=1, c2=2):
+    lower, upper = bounds
+
+    # Initialize position and velocity
+    particles = np.random.uniform(lower, upper, (num_particles, dim))
+    velocities = velocities = np.zeros((num_particles, dim))
+
+    # Evaluate initial fitness
+    best_positions = np.copy(particles)
+    best_fitness = np.array([benchmark_func(i) for i in particles])
+
+    global_best_position = best_positions[np.argmin(best_fitness)]
+    global_best_fitness = np.min(best_fitness)
+    fitness_log = []
+
+    for i in range(iterations):
+
+        # Update velocity
+        r1 = np.random.uniform(0, 1, (num_particles, dim))
+        r2 = np.random.uniform(0, 1, (num_particles, dim))
+        velocities = (
+            w * velocities +
+            c1 * r1 * (best_positions - particles) +
+            c2 * r2 * (global_best_position - particles)
+        )
+
+        # Update position
+        particles += velocities
+
+        # Evaluate new fitness
+        new_fitness = np.array([benchmark_func(p) for p in particles])
+
+        # Update best postions and fitness
+        improved_idx = np.where(new_fitness < best_fitness)
+        best_positions[improved_idx] = particles[improved_idx]
+        best_fitness[improved_idx] = new_fitness[improved_idx]
+        if np.min(new_fitness) < global_best_fitness:
+            global_best_fitness = particles[np.argmin(new_fitness)]
+            global_best_fitness = np.min(new_fitness)
+
+    fitness_log.append(global_best_fitness)
+
+    return np.array(fitness_log), global_best_position
