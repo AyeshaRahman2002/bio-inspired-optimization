@@ -4,7 +4,7 @@ import os
 import importlib
 
 # Import benchmark functions
-from benchmarks import sphere, rastrigin
+from benchmarks import sphere, rastrigin, rosenbrock, ackley, griewank
 from plotting import plot_grouped_logs
 
 # === CONFIG ===
@@ -18,8 +18,11 @@ np.random.seed(SEED)
 
 # === Benchmark functions
 benchmarks = {
-    "sphere": sphere.evaluate,
-    "rastrigin": rastrigin.evaluate,
+    "sphere": sphere,
+    "rastrigin": rastrigin,
+    "rosenbrock": rosenbrock,
+    "ackley": ackley,
+    "griewank": griewank
 }
 
 # === Dynamically try to import available algorithm modules
