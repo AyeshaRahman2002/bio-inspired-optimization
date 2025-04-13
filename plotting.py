@@ -15,10 +15,13 @@ COLORS = {
 }
 
 def get_algo_and_benchmark(file_name):
-    base = os.path.basename(file_name)
-    parts = base.replace(".csv", "").split("_")
-    algo = parts[0]
-    bench = parts[1]
+    base = os.path.basename(file_name).replace(".csv", "")
+    parts = base.split("_")
+    # Algo name might contain underscores (e.g. lm_impa)
+    # So find where 'runX' starts and use everything before it
+    run_idx = next(i for i, part in enumerate(parts) if part.startswith("run"))
+    algo = "_".join(parts[:run_idx - 1])
+    bench = parts[run_idx - 1]
     return algo, bench
 
 def group_logs_by_benchmark():
