@@ -27,7 +27,7 @@ benchmarks = {
 }
 
 # === Dynamically try to import available algorithm modules
-algorithm_modules = ["mpa", "pso", "lm_impa"]
+algorithm_modules = ["adam", "mpa", "pso", "lm_impa"]
 algorithms = {}
 
 for module_name in algorithm_modules:
