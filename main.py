@@ -69,7 +69,7 @@ def run_all():
                 np.savetxt(log_path, fitness_log, delimiter=",")
 
                 print(f"Run {run}/10 complete. Time: {duration}s. Final fitness: {fitness_log[-1]:.6f}")
-            print(best_solution)
+            print(np.save("best.npy",best_solution))
 
 if __name__ == "__main__":
     run_all()

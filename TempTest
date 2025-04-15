@@ -1,10 +1,7 @@
 from benchmarks.breastCancer import BreastCancer
+import numpy as np
 model = BreastCancer()
-
-test_acc = model.test_model([-4.96524755, -4.95127858, -0.14647833, -4.99984868, -2.9257554,  -1.68297263,
- -5.,         -5. ,        -0.81920292 , 3.75763685, -5.     ,     1.66126765,
- -2.46292013, -5.     ,    -0.79685157 , 3.98191333, -1.4947523 , -0.7804709,
-  2.32207599 , 5.      ,   -3.35441055 ,-5.     ,    -4.93000128 -5.,
- -5.     ,     1.1638296 , -3.47550614 ,-4.46638802, -3.84834942 ,-2.3296372,
-  3.95010712])
+bestWeights = np.load("best.npy")
+print(bestWeights.size)
+test_acc = model.test_model(bestWeights)
 print(test_acc)
