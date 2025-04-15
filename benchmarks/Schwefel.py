@@ -23,3 +23,5 @@ class Schwefel:
 
     def getBounds():
         return (-500, 500)
+    def getDimensions():
+        return 30

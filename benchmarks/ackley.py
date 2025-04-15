@@ -32,3 +32,7 @@ class ackley:
         return sum_sq_term + cos_term + a + np.exp(1)
     def getBounds():
         return (-32.768, 32.768)
+    
+    def getDimensions():
+        return 30
+    

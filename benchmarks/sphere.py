@@ -11,3 +11,6 @@ class sphere:
 
     def getBounds():
         return (-5, 5)
+    
+    def getDimensions():
+        return 30
