@@ -26,7 +26,7 @@ def run_pso(benchmark_func, dim, pop_size, iterations, bounds, w=0.5, c1=1, c2=2
             c2 * r2 * (global_best_position - particles)
         )
 
-        # Update position
+        # Update position 
         particles += velocities
 
         # Evaluate new fitness
