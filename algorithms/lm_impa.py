@@ -62,7 +62,12 @@ def run_lm_impa(benchmark_func, dim, pop_size, iterations, bounds):
             for idx in top_indices:
                 initial = population[idx].copy()
                 before = fitness[idx]
-                result = minimize(benchmark_func, initial, bounds=[(lower, upper)] * dim, method='L-BFGS-B')
+                if isinstance(lower, list) and isinstance(upper, list):
+                    bounds_list = list(zip(lower, upper))
+                else:
+                    bounds_list = [(lower, upper)] * dim
+
+                result = minimize(benchmark_func, initial, bounds=bounds_list, method='L-BFGS-B')
                 after = result.fun
                 if after < before:
                     population[idx] = result.x
