@@ -22,3 +22,5 @@ class griewank:
         return sum_term - prod_term + 1
     def getBounds():
         return (-600, 600)
+    def getDimensions():
+        return 30

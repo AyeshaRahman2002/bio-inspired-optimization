@@ -16,3 +16,5 @@ class rosenbrock:
         )
     def getBounds():
         return (-10, 10)
+    def getDimensions():
+        return 30

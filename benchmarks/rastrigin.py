@@ -11,3 +11,5 @@ class rastrigin:
         return 10 * n + np.sum(position**2 - 10 * np.cos(2 * np.pi * position))
     def getBounds():
         return (-5.12, 5.12)
+    def getDimensions():
+        return 30

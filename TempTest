@@ -1,0 +1,7 @@
+from benchmarks.breastCancer import BreastCancer
+import numpy as np
+model = BreastCancer()
+bestWeights = np.load("best.npy")
+print(bestWeights.size)
+test_acc = model.test_model(bestWeights)
+print(test_acc)
