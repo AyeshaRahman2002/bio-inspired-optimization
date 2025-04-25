@@ -1,25 +1,24 @@
 import numpy as np
+
 class Schwefel:
-    def evaluate(position):
+    def evaluate(self, position):
         """
-        Shwefel problem
+        Schwefel Function
         Global minimum: f(x) = 0 at x = [420.9687,..., 420.9687]
         Domain: Typically [-500,500]
-        Characteristics: Complex large function with lots of local minima
-        Useful for testing an algorithm's ability in tightly clumped local minima 
-        
-        Formula:
-            f(x) = a * d - sum(x* sin(sqrt(abs(x))))
-        where a = 418.9829
+        Characteristics: Complex landscape with many local minima.
         """
         position = np.clip(position, -500, 500)
         a = 418.9829
         d = len(position)  # Dimensionality
-        
-        firstTerm = a*d
+
+        firstTerm = a * d
         sumTerm = np.sum(position * np.sin(np.sqrt(np.abs(position))))
 
         return firstTerm - sumTerm
 
-    def getBounds():
+    def getBounds(self):
         return (-500, 500)
+
+    def getDimensions(self):
+        return 30  # Default dimensionality
