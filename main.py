@@ -5,7 +5,9 @@ import importlib
 
 from benchmarks import sphere, rastrigin, rosenbrock, ackley, griewank, Schwefel
 from benchmarks.breastCancer import BreastCancer
-from plotting import plot_grouped_logs
+from benchmarks.listSort import ListSort
+from benchmarks.listSortCoEvo import ListSortCoEvo
+from plotting import plot_grouped_logs, plot_coevolution_listsort
 
 # === CONFIG ===
 POP_SIZE = 50
@@ -16,13 +18,14 @@ np.random.seed(SEED)
 
 # === Benchmark functions
 benchmarks = {
-    "sphere": sphere(),
-    "rastrigin": rastrigin(),
-    "rosenbrock": rosenbrock(),
-    "ackley": ackley(),
-    "griewank": griewank(),
-    "Schwefel": Schwefel(),
-    "breastcancer": BreastCancer()
+    # "sphere": sphere(),
+    # "rastrigin": rastrigin(),
+    # "rosenbrock": rosenbrock(),
+    # "ackley": ackley(),
+    # "griewank": griewank(),
+    # "Schwefel": Schwefel(),
+    # "breastcancer": BreastCancer(),
+    "listsort": ListSort()
 }
 
 # === Import algorithm modules
@@ -95,8 +98,52 @@ def run_all():
                 if algo_name != "adam_torch":
                     bench.test_model(best_solution)
 
+def coevolution_sort_demo():
+    benchmark = ListSortCoEvo()
+    dim = benchmark.getDimensions()
+    bounds = benchmark.getBounds()
+    
+    POP_SIZE = 30
+    ITERATIONS = 100
+    MUTATION_RATE = 0.2
+
+    # Random initial sorter population
+    sorters = [np.random.uniform(bounds[0], bounds[1], dim) for _ in range(POP_SIZE)]
+    best_fitnesses = []
+
+    for gen in range(ITERATIONS):
+        fitnesses = [benchmark.evaluate_sorter(genome) for genome in sorters]
+        sorted_indices = np.argsort(fitnesses)
+        sorters = [sorters[i] for i in sorted_indices[:POP_SIZE//2]]  # selection
+
+        # Mutate to produce offspring
+        new_sorters = []
+        for s in sorters:
+            offspring = s.copy()
+            mutation_mask = np.random.rand(dim) < MUTATION_RATE
+            noise = np.random.uniform(-1, 1, dim) * mutation_mask
+            offspring += noise
+            new_sorters.append(offspring)
+
+        sorters += new_sorters
+
+        # Evolve the test lists based on current sorters
+        benchmark.evolve_lists(sorters)
+
+        best_fitness = fitnesses[sorted_indices[0]]
+        best_fitnesses.append(best_fitness)
+        print(f"Generation {gen+1}/{ITERATIONS} - Best fitness (avg inversions): {best_fitness:.3f}")
+
+    # Save convergence log
+    np.savetxt("results/fitness_logs/coevo_listsort.csv", best_fitnesses, delimiter=",")
+
 if __name__ == "__main__":
     run_all()
+
+    print("\nRunning co-evolution demo...")
+    coevolution_sort_demo()
+
     print("\nGenerating plots...")
     plot_grouped_logs()
+    plot_coevolution_listsort()
     print("Plots saved in results/plots/")

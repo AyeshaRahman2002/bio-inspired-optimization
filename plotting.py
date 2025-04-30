@@ -1,4 +1,3 @@
-# plotting.py
 import os
 import numpy as np
 import matplotlib.pyplot as plt
@@ -23,6 +22,8 @@ def get_algo_and_benchmark(file_name):
 def group_logs_by_benchmark():
     grouped = {}
     for filepath in glob(f"{LOG_DIR}/*.csv"):
+        if "coevo_listsort" in filepath:
+            continue
         algo, bench = get_algo_and_benchmark(filepath)
         if bench not in grouped:
             grouped[bench] = {}
@@ -57,3 +58,25 @@ def plot_grouped_logs():
         plt.tight_layout()
         plt.savefig(f"{PLOT_DIR}/{benchmark}_convergence.png")
         plt.close()
+
+def plot_coevolution_listsort():
+    filepath = f"{LOG_DIR}/coevo_listsort.csv"
+    if not os.path.exists(filepath):
+        print(f"[WARNING] coevo_listsort.csv not found.")
+        return
+
+    fitness_log = np.loadtxt(filepath, delimiter=",")
+
+    plt.figure(figsize=(10, 6))
+    x = np.arange(len(fitness_log))
+    plt.plot(x, fitness_log, label="Co-Evolution Sorter Fitness", color="blue")
+
+    plt.title("Co-Evolution Progress: Sorting Strategy vs Evolving Lists")
+    plt.xlabel("Generation")
+    plt.ylabel("Average Inversions (Lower = Better)")
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+    plt.savefig(f"{PLOT_DIR}/coevo_listsort_convergence.png")
+    plt.close()
+    print("Saved co-evolution plot as results/plots/coevo_listsort_convergence.png")
