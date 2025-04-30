@@ -18,13 +18,13 @@ np.random.seed(SEED)
 
 # === Benchmark functions
 benchmarks = {
-    # "sphere": sphere(),
-    # "rastrigin": rastrigin(),
-    # "rosenbrock": rosenbrock(),
-    # "ackley": ackley(),
-    # "griewank": griewank(),
-    # "Schwefel": Schwefel(),
-    # "breastcancer": BreastCancer(),
+    "sphere": sphere(),
+    "rastrigin": rastrigin(),
+    "rosenbrock": rosenbrock(),
+    "ackley": ackley(),
+    "griewank": griewank(),
+    "Schwefel": Schwefel(),
+    "breastcancer": BreastCancer(),
     "listsort": ListSort()
 }
 
