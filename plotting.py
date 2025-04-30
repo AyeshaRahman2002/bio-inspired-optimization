@@ -33,6 +33,21 @@ def group_logs_by_benchmark():
 
 def plot_grouped_logs():
     grouped_logs = group_logs_by_benchmark()
+    
+    custom_colors = {
+        "PSO": "blue",
+        "ADAM": "darkorange",
+        "ADAM_TORCH": "green",
+        "LM_IMPA": "red",
+        "MPA": "purple"
+    }
+    custom_linestyles = {
+        "PSO": "-",
+        "ADAM": "--",
+        "ADAM_TORCH": "-.",
+        "LM_IMPA": "-",
+        "MPA": ":"
+    }
     for benchmark, algo_runs in grouped_logs.items():
         plt.figure(figsize=(10, 6))
         algo_colors = {algo: next(color_cycle) for algo in algo_runs}
@@ -46,8 +61,10 @@ def plot_grouped_logs():
             std = np.std(arr, axis=0)
 
             x = np.arange(len(avg))
-            plt.plot(x, avg, label=algo.upper(), color=algo_colors[algo])
-            plt.fill_between(x, avg - std, avg + std, alpha=0.2, color=algo_colors[algo])
+            color = custom_colors.get(algo.upper(), next(color_cycle))
+            linestyle = custom_linestyles.get(algo.upper(), "-")
+            plt.plot(x, avg, label=algo.upper(), color=color, linestyle=linestyle, linewidth=2)
+            plt.fill_between(x, avg - std, avg + std, alpha=0.2, color=color)
 
         plt.title(f"Convergence on {benchmark.upper()}")
         plt.xlabel("Iterations")
