@@ -38,14 +38,14 @@ def plot_grouped_logs():
         "PSO": "blue",
         "ADAM": "darkorange",
         "ADAM_TORCH": "green",
-        "LM_IMPA": "red",
+        "LM_IMPA": "black",
         "MPA": "purple"
     }
     custom_linestyles = {
         "PSO": "-",
         "ADAM": "--",
         "ADAM_TORCH": "-.",
-        "LM_IMPA": "-",
+        "LM_IMPA": "--.",
         "MPA": ":"
     }
     for benchmark, algo_runs in grouped_logs.items():
