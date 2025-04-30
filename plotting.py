@@ -33,7 +33,7 @@ def group_logs_by_benchmark():
 
 def plot_grouped_logs():
     grouped_logs = group_logs_by_benchmark()
-    
+
     custom_colors = {
         "PSO": "blue",
         "ADAM": "darkorange",
@@ -41,16 +41,25 @@ def plot_grouped_logs():
         "LM_IMPA": "black",
         "MPA": "purple"
     }
+    
     custom_linestyles = {
         "PSO": "-",
         "ADAM": "--",
         "ADAM_TORCH": "-.",
-        "LM_IMPA": "--.",
-        "MPA": ":"
+        "LM_IMPA": ":",
+        "MPA": (0, (3, 1, 1, 1))  # dotted-dashed
     }
+
+    custom_markers = {
+        "PSO": "o",
+        "ADAM": "s",
+        "ADAM_TORCH": "D",
+        "LM_IMPA": "^",
+        "MPA": "x"
+    }
+
     for benchmark, algo_runs in grouped_logs.items():
         plt.figure(figsize=(10, 6))
-        algo_colors = {algo: next(color_cycle) for algo in algo_runs}
 
         for algo, filepaths in algo_runs.items():
             all_runs = [np.loadtxt(fp, delimiter=",") for fp in filepaths]
@@ -61,9 +70,13 @@ def plot_grouped_logs():
             std = np.std(arr, axis=0)
 
             x = np.arange(len(avg))
-            color = custom_colors.get(algo.upper(), next(color_cycle))
-            linestyle = custom_linestyles.get(algo.upper(), "-")
-            plt.plot(x, avg, label=algo.upper(), color=color, linestyle=linestyle, linewidth=2)
+            algo_upper = algo.upper()
+            color = custom_colors.get(algo_upper, next(color_cycle))
+            linestyle = custom_linestyles.get(algo_upper, "-")
+            marker = custom_markers.get(algo_upper, None)
+
+            plt.plot(x, avg, label=algo_upper, color=color, linestyle=linestyle,
+                     marker=marker, markevery=50, linewidth=2)
             plt.fill_between(x, avg - std, avg + std, alpha=0.2, color=color)
 
         plt.title(f"Convergence on {benchmark.upper()}")
