@@ -5,6 +5,7 @@ import importlib
 
 from benchmarks import sphere, rastrigin, rosenbrock, ackley, griewank, Schwefel
 from benchmarks.breastCancer import BreastCancer
+from benchmarks.breatCancerNN import BreastCancerNN
 from plotting import plot_grouped_logs
 
 # === CONFIG ===
@@ -16,17 +17,19 @@ np.random.seed(SEED)
 
 # === Benchmark functions
 benchmarks = {
-    "sphere": sphere(),
-    "rastrigin": rastrigin(),
-    "rosenbrock": rosenbrock(),
-    "ackley": ackley(),
-    "griewank": griewank(),
-    "Schwefel": Schwefel(),
-    "breastcancer": BreastCancer()
+    #"sphere": sphere(),
+    #"rastrigin": rastrigin(),
+    #"rosenbrock": rosenbrock(),
+    #"ackley": ackley(),
+    #"griewank": griewank(),
+    #"Schwefel": Schwefel(),
+    #"breastcancer": BreastCancer(),
+    "breastcancerNN": BreastCancerNN()
 }
 
 # === Import algorithm modules
-algorithm_modules = ["adam_torch", "mpa", "pso", "lm_impa"]
+algorithm_modules = [#adam_torch", 
+                     "mpa"]#, "pso", "lm_impa"]
 algorithms = {}
 
 for module_name in algorithm_modules:
@@ -100,3 +103,5 @@ if __name__ == "__main__":
     print("\nGenerating plots...")
     plot_grouped_logs()
     print("Plots saved in results/plots/")
+    #newBreast = BreastCancerNN()
+    #print(newBreast.getDimensions())
