@@ -5,6 +5,7 @@ import importlib
 
 from benchmarks import sphere, rastrigin, rosenbrock, ackley, griewank, Schwefel
 from benchmarks.breastCancer import BreastCancer
+from benchmarks.listSort import ListSort
 from plotting import plot_grouped_logs
 
 # === CONFIG ===
@@ -22,7 +23,8 @@ benchmarks = {
     "ackley": ackley(),
     "griewank": griewank(),
     "Schwefel": Schwefel(),
-    "breastcancer": BreastCancer()
+    "breastcancer": BreastCancer(),
+    "listsort": ListSort()
 }
 
 # === Import algorithm modules

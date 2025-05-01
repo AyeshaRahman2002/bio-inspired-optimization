@@ -1,4 +1,3 @@
-# plotting.py
 import os
 import numpy as np
 import matplotlib.pyplot as plt
@@ -23,6 +22,8 @@ def get_algo_and_benchmark(file_name):
 def group_logs_by_benchmark():
     grouped = {}
     for filepath in glob(f"{LOG_DIR}/*.csv"):
+        if "coevo_listsort" in filepath:
+            continue
         algo, bench = get_algo_and_benchmark(filepath)
         if bench not in grouped:
             grouped[bench] = {}
@@ -41,7 +42,7 @@ def plot_grouped_logs():
         "LM_IMPA": "black",
         "MPA": "purple"
     }
-    
+
     custom_linestyles = {
         "PSO": "-",
         "ADAM": "--",
@@ -71,12 +72,12 @@ def plot_grouped_logs():
 
             x = np.arange(len(avg))
             algo_upper = algo.upper()
+
             color = custom_colors.get(algo_upper, next(color_cycle))
             linestyle = custom_linestyles.get(algo_upper, "-")
             marker = custom_markers.get(algo_upper, None)
 
-            plt.plot(x, avg, label=algo_upper, color=color, linestyle=linestyle,
-                     marker=marker, markevery=50, linewidth=2)
+            plt.plot(x, avg, label=algo_upper, color=color, linestyle=linestyle, linewidth=2, marker=marker, markevery=50)
             plt.fill_between(x, avg - std, avg + std, alpha=0.2, color=color)
 
         plt.title(f"Convergence on {benchmark.upper()}")
