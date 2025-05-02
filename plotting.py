@@ -45,7 +45,7 @@ def plot_grouped_logs():
         "PSO": "-",
         "ADAM": "--",
         "ADAM_TORCH": "-.",
-        "LM_IMPA": "--.",
+        "LM_IMPA": "-",
         "MPA": ":"
     }
     for benchmark, algo_runs in grouped_logs.items():

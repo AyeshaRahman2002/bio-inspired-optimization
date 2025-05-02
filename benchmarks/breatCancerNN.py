@@ -92,7 +92,7 @@ class BreastCancerNN:
         b1 = weights[pointer:pointer + H1]
         pointer += H1
         
-        hidden1 = np.dot(self.X_train, w1) + b1
+        hidden1 = np.dot(self.X_test, w1) + b1
         hidden_output1 = 1 / (1 + np.exp(-np.clip(hidden1, -100, 100)))
         
         if H2 > 0:
@@ -113,7 +113,7 @@ class BreastCancerNN:
             b_out = weights[pointer]
             output = np.dot(hidden_output1, w_out) + b_out
                 
-            output = np.clip(output, -100, 100)
-            predictions = 1 / (1 + np.exp(-output)) > 0.5
+        output = np.clip(output, -100, 100)
+        predictions = 1 / (1 + np.exp(-output)) > 0.5
         acc = accuracy_score(self.y_test, predictions)
         print(f"Test Accuracy on Breast Cancer: {acc:.4f}")

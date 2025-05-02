@@ -28,8 +28,7 @@ benchmarks = {
 }
 
 # === Import algorithm modules
-algorithm_modules = [#adam_torch", 
-                     "mpa"]#, "pso", "lm_impa"]
+algorithm_modules = ["adam_torch", "mpa", "pso", "lm_impa"]
 algorithms = {}
 
 for module_name in algorithm_modules:
@@ -84,13 +83,13 @@ def run_all():
 
                 final_fitness = fitness_log[-1]
                 print(f"Run {run}/{RUNS} complete. Time: {duration}s. Final fitness: {final_fitness:.6f}")
-
-                if bench_name.lower() == "breastcancer" and final_fitness < best_fitness:
+                
+                if ((bench_name.lower() == "breastcancer") or (bench_name.lower() == "breastcancernn")) and final_fitness < best_fitness:
                     best_fitness = final_fitness
                     best_solution = weights
 
             # Save only best solution weights
-            if bench_name.lower() == "breastcancer" and best_solution is not None:
+            if ((bench_name.lower() == "breastcancer") or (bench_name.lower() == "breastcancernn")) and best_solution is not None:
                 weight_path = f"{weights_dir}/{algo_name}_{bench_name}_BEST.npy"
                 np.save(weight_path, best_solution)
                 print(f"[SAVED BEST] {algo_name} on {bench_name}: {weight_path}")
@@ -98,10 +97,15 @@ def run_all():
                 if algo_name != "adam_torch":
                     bench.test_model(best_solution)
 
+def printModel():
+    for algo_name,_ in algorithms.items():
+        for bench_name,_ in benchmarks.items():
+            model = np.load(f"{weights_dir}/{algo_name}_{bench_name}_BEST.npy", allow_pickle=True)
+            print(algo_name)
+            print(model[:2])
 if __name__ == "__main__":
-    run_all()
-    print("\nGenerating plots...")
-    plot_grouped_logs()
-    print("Plots saved in results/plots/")
-    #newBreast = BreastCancerNN()
-    #print(newBreast.getDimensions())
+    #run_all()
+    #print("\nGenerating plots...")
+    #plot_grouped_logs()
+    #print("Plots saved in results/plots/")
+    printModel()
