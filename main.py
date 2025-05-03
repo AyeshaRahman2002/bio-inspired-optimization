@@ -103,10 +103,11 @@ def printModel():
             model = np.load(f"{weights_dir}/{algo_name}_{bench_name}_BEST.npy", allow_pickle=True)
             print(algo_name)
             print(model[:2])
-            print(len(model))
 if __name__ == "__main__":
-    #run_all()
-    #print("\nGenerating plots...")
-    #plot_grouped_logs()
-    #print("Plots saved in results/plots/")
+    run_all()
+    print("\nGenerating plots...")
+    plot_grouped_logs()
+    print("Plots saved in results/plots/")
+    print("Models for each algorithm:")
     printModel()
+    
