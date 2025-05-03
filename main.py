@@ -26,7 +26,7 @@ benchmarks = {
     "Schwefel": Schwefel(),
     "breastcancer": BreastCancer(),
     "listsort":ListSort(),
-    "breastcancernn":BreastCancerNN()
+    "breastcancerNN":BreastCancerNN()
 }
 
 # === Import algorithm modules
@@ -101,14 +101,13 @@ def run_all():
 
 def printModel():
     for algo_name,_ in algorithms.items():
-        for bench_name,_ in benchmarks.items():
-            model = np.load(f"{weights_dir}/{algo_name}_{bench_name}_BEST.npy", allow_pickle=True)
-            print(algo_name)
-            print(model[:2])
+        model = np.load(f"{weights_dir}/{algo_name}_breastCancerNN_BEST.npy", allow_pickle=True)
+        print(algo_name)
+        print(model[:2])
 
 if __name__ == "__main__":
-    run_all()
-    print("\nGenerating plots...")
+    #run_all()
+    #print("\nGenerating plots...")
     plot_grouped_logs()
     print("Plots saved in results/plots/")
     print("Models for each algorithm:")
