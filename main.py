@@ -5,7 +5,7 @@ import importlib
 
 from benchmarks import sphere, rastrigin, rosenbrock, ackley, griewank, Schwefel
 from benchmarks.breastCancer import BreastCancer
-from benchmarks.breatCancerNN import BreastCancerNN
+from benchmarks.breastCancerNN import BreastCancerNN
 from benchmarks.listSort import ListSort
 from plotting import plot_grouped_logs
 
@@ -105,6 +105,7 @@ def printModel():
             model = np.load(f"{weights_dir}/{algo_name}_{bench_name}_BEST.npy", allow_pickle=True)
             print(algo_name)
             print(model[:2])
+
 if __name__ == "__main__":
     run_all()
     print("\nGenerating plots...")
