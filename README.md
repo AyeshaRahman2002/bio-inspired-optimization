@@ -22,3 +22,23 @@ A population-based optimization technique inspired by the collective behavior of
 
 ### LM-IMPA (Hybrid Algorithm)
 A hybrid approach combining the global search power of MPA with the local refinement capabilities of the Levenberg–Marquardt algorithm, designed to improve convergence and accuracy.
+
+
+### Contribution Statement:
+
+**Ayesha Rahman**
+Main pipeline - Main.py and Plotting.py
+Algorithms - Adam, LM_IMPA, MPA
+Benchmarks - BreastCancer, Sphere, listSort, Rosenbrock, Ackley
+
+**James Zhangly**
+Algorithms - PSO
+Benchmarks - BreasCancerNN, Rastrigin, Schwefel, Griewank
+
+
+Modifications to functions/classes and methods were made collaboratively by both parties to accommodate changes and maintain agreed-upon standards so a shared main function could be used.
+
+
+### Running information
+Run the Main.py file
+Output files are in the results/plots for graphs
