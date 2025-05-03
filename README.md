@@ -40,6 +40,6 @@ Modifications to functions/classes and methods were made collaboratively by both
 
 
 ### Running information  
-Install dependencies pip install -r requirements.txt
+Install dependencies pip install -r requirements.txt  
 Run the Main.py file  
 Output files are in the results/plots for graphs 
