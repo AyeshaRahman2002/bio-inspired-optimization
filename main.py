@@ -24,7 +24,9 @@ benchmarks = {
     "ackley": ackley(),
     "griewank": griewank(),
     "Schwefel": Schwefel(),
-    "breastcancer": BreastCancer()
+    "breastcancer": BreastCancer(),
+    "listsort":ListSort(),
+    "breastcancernn":BreastCancerNN()
 }
 
 # === Import algorithm modules
