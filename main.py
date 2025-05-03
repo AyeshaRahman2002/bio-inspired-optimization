@@ -6,6 +6,7 @@ import importlib
 from benchmarks import sphere, rastrigin, rosenbrock, ackley, griewank, Schwefel
 from benchmarks.breastCancer import BreastCancer
 from benchmarks.breatCancerNN import BreastCancerNN
+from benchmarks.listSort import ListSort
 from plotting import plot_grouped_logs
 
 # === CONFIG ===
@@ -17,14 +18,13 @@ np.random.seed(SEED)
 
 # === Benchmark functions
 benchmarks = {
-    #"sphere": sphere(),
-    #"rastrigin": rastrigin(),
-    #"rosenbrock": rosenbrock(),
-    #"ackley": ackley(),
-    #"griewank": griewank(),
-    #"Schwefel": Schwefel(),
-    #"breastcancer": BreastCancer(),
-    "breastcancerNN": BreastCancerNN()
+    "sphere": sphere(),
+    "rastrigin": rastrigin(),
+    "rosenbrock": rosenbrock(),
+    "ackley": ackley(),
+    "griewank": griewank(),
+    "Schwefel": Schwefel(),
+    "breastcancer": BreastCancer()
 }
 
 # === Import algorithm modules
