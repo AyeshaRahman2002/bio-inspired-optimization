@@ -106,8 +106,8 @@ def printModel():
         print(model[:2])
 
 if __name__ == "__main__":
-    #run_all()
-    #print("\nGenerating plots...")
+    run_all()
+    print("\nGenerating plots...")
     plot_grouped_logs()
     print("Plots saved in results/plots/")
     print("Models for each algorithm:")
