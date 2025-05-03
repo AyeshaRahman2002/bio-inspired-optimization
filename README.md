@@ -35,11 +35,17 @@ Benchmarks - BreastCancer, Sphere, listSort, Rosenbrock, Ackley
 Algorithms - PSO  
 Benchmarks - BreasCancerNN, Rastrigin, Schwefel, Griewank  
 
+> Modifications to shared functions, classes, and methods were made collaboratively to ensure compatibility and maintain a unified structure for the pipeline. All code was written with agreed-upon standards to support seamless integration through a shared `main()` function.
 
-Modifications to functions/classes and methods were made collaboratively by both parties to accommodate changes and maintain agreed-upon standards so a shared main function could be used.
+### **Running Instructions**
 
+1. **Execute the main script**:
 
-### Running information  
-Install dependencies pip install -r requirements.txt  
-Run the Main.py file  
-Output files are in the results/plots for graphs 
+   ```bash
+   python main.py
+   ```
+
+2. **Output files**:
+
+   * All generated plots and result files are saved in the `results/plots/` directory.
+
