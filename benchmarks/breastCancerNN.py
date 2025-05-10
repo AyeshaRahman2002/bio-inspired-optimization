@@ -71,7 +71,7 @@ class BreastCancerNN:
             return 1  # Return bad fitness on error
 
     def getBounds(self):
-        arch_bounds = [(2, 20), (0, 20)]
+        arch_bounds = [(1, 20), (0, 20)]
         weight_bounds = [(-5, 5)] * self.maxDim
         lower = [b[0] for b in arch_bounds + weight_bounds]
         upper = [b[1] for b in arch_bounds + weight_bounds]
